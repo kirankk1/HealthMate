@@ -12,6 +12,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
+import HealthMate from "../assets/images/HealthMate.png";
 
 export default function Header() {
   const path = useLocation().pathname;
@@ -31,10 +32,10 @@ export default function Header() {
         to="/"
         className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
       >
-        <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white ">
-          Drug
-        </span>
-        Recommandation
+        <div className="flex card">
+          <img src={HealthMate} alt="" srcset="" className="w-16 ml-3"/>
+          <h2 className="hidden lg:block mt-1">HealthMate</h2>
+        </div>
       </Link>
       <form onSubmit={handleSearch}>
         <TextInput
@@ -47,7 +48,7 @@ export default function Header() {
         />
       </form>
       <Button className="w-10 h-9 lg:hidden" color="gray" pill>
-        <AiOutlineSearch />
+        <AiOutlineSearch/>
       </Button>
       <div className="flex gap-2 md:order-2">
         <Button
@@ -66,7 +67,7 @@ export default function Header() {
               <Avatar
                 alt="User Avatar"
                 img={currentUser.profilePicture}
-                rounded // Fallback to default image
+                rounded 
               />
             }
           >
