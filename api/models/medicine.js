@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 const medicineSchema = new mongoose.Schema({
     MedicineName: { type: String },
-    ImageUrl :{type: String},
+    ImageURL :{type: String},
     Composition:{type: String},
     Introduction: {type:String},
     Benefits: {type:String},

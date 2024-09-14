@@ -1,10 +1,17 @@
 import React from "react";
-import { Carousel } from "flowbite-react";
+import { Button, Carousel } from "flowbite-react";
 import img1 from "../assets/images/img1.jpg";
 import img2 from "../assets/images/img2.png";
 import img3 from "../assets/images/img3.jpg";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
+
+  const handleViewMedicine = () => {
+    navigate(`/medicines/`);
+  };
+
   return (
     <>
       <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
@@ -14,7 +21,7 @@ export default function Home() {
           <img src={img3} alt="..." />
         </Carousel>
       </div>
-      <div className=" p-8 bg-[#f0f8ff] shadow-md text-center">
+      <div className="p-8 bg-[#f0f8ff] shadow-md text-center">
         <h1 className="text-4xl text-[#007bff] mb-2">
           Your Health, Our Priority
         </h1>
@@ -22,10 +29,15 @@ export default function Home() {
           Discover the best medicines and healthcare products curated just for
           you.
         </p>
-        <button className="mt-5 py-2 px-5 text-white bg-[#007bff] rounded-lg hover:bg-[#0056b3] transition-colors duration-300">
-          Shop Now
-        </button>
+        <div className="mt-5 flex justify-center">
+          <Link to="/medicines">
+            <Button className="py-2 px-5 text-white bg-[#007bff] rounded-lg hover:bg-[#91bcea] transition-colors duration-300">
+              Explore Now
+            </Button>
+          </Link>
+        </div>
       </div>
+
       <div className="mt-10 p-10 bg-[#e9f5ff] shadow-md text-center">
         <h2 className="text-3xl text-[#333] mb-2">
           Welcome to Our Online Pharmacy

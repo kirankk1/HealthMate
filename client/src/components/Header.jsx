@@ -26,6 +26,12 @@ export default function Header() {
     navigate(`/medicines?search=${searchTerm}`); 
   };
 
+  const [searchVisible, setSearchVisible] = useState(false);
+
+  const handleButtonClick = () => {
+    setSearchVisible(true);
+  };
+
   return (
     <Navbar className="border-b-2 sticky top-0 py-6">
       <Link
@@ -47,9 +53,16 @@ export default function Header() {
           className="hidden lg:inline"
         />
       </form>
-      <Button className="w-10 h-9 lg:hidden" color="gray" pill>
-        <AiOutlineSearch/>
-      </Button>
+      <form onSubmit={handleSearch}>
+        <TextInput
+          placeholder="Search"
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          rightIcon={AiOutlineSearch}
+          className="lg:hidden"
+        />
+      </form>
       <div className="flex gap-2 md:order-2">
         <Button
           className="w-12 h-10 hidden sm:inline"
@@ -106,3 +119,7 @@ export default function Header() {
     </Navbar>
   );
 }
+
+
+
+

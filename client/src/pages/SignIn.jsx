@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signInSuccess, signInStart, signInFailure } from "../redux/user/userSlice";
 import OAuth from "../components/OAuth";
+import HealthMate from '../assets/images/HealthMate.png'
 
 export default function SignIn() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -47,14 +48,14 @@ export default function SignIn() {
         {/* left */}
         <div className="flex-1">
           <Link to="/" className="font-bold dark:text-white text-4xl">
-            <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white ">
-              Drug 
-            </span>
-            Recommandation
+          <div className="flex card">
+          <img src={HealthMate} alt="" srcset="" className="w-16 ml-3"/>
+          <h2 className="hidden lg:block mt-1">HealthMate</h2>
+        </div>
           </Link>
           <p className="text-sm mt-5">
             You can Sign In with your email and password or Google to start using
-            the Drug application.
+            the HealthMate.
           </p>
         </div>
         {/* right */}

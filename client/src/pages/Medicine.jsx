@@ -28,17 +28,6 @@ const Medicine = () => {
     fetchMedicines();
   }, [location.search]);
 
-  const handleAddMedicine = async (medicine) => {
-    const timeInterval = prompt("Enter time intervals (in hours) to send notifications:");
-    if (!timeInterval) return;
-
-    try {
-      await axios.post('http://localhost:3000/api/my_medicines', { medicineId: medicine._id, timeInterval });
-      alert(`Medicine added! Notifications will be sent every ${timeInterval} hours.`);
-    } catch (error) {
-      console.error("Error adding medicine:", error.message);
-    }
-  };
 
   const handleViewDetails = (medicineId) => {
     navigate(`/medicines/${medicineId}`);
@@ -53,12 +42,11 @@ const Medicine = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {medicines.map((medicine) => (
             <div key={medicine._id} className="border rounded-lg p-4 bg-white shadow-lg flex flex-col items-center">
-              <img src={medicine.ImageUrl} alt={medicine.MedicineName} className="mb-3 w-32 h-32 object-cover" />
+              <img src={medicine.ImageURL} alt={medicine.MedicineName} className="mb-3 w-32 h-32 object-cover" />
               <h2 className="text-xl font-semibold text-center mb-2">{medicine.MedicineName}</h2>
               <p className="text-lg font-bold mb-1">Price: ₹{medicine.Price}</p>
               <button
                 className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-                onClick={() => handleAddMedicine(medicine)}
               >
                 Add
               </button>
