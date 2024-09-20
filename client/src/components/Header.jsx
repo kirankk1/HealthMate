@@ -33,7 +33,7 @@ export default function Header() {
   };
 
   return (
-    <Navbar className="border-b-2 sticky top-0 py-6">
+    <Navbar className="border-b-2 top-0 py-4">
       <Link
         to="/"
         className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"

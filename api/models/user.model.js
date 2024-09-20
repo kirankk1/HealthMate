@@ -3,16 +3,16 @@ import mongoose from "mongoose";
 const myMedicineSchema = new mongoose.Schema({
   medicineId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Medicine',  // Reference to the Medicine model
+    ref: 'Medicine',  
     required: true,
   },
   timeIntervals: {
-    type: [String],  // An array to store time intervals for notifications (e.g., "08:00", "20:00")
+    type: [String],  
     required: true,
   },
   addedAt: {
     type: Date,
-    default: Date.now,  // Tracks when the medicine was added to the user's list
+    default: Date.now,  
   },
 });
 

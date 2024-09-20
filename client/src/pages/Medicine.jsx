@@ -39,7 +39,7 @@ const Medicine = () => {
   return (
     <div className="container mx-auto p-6">
       {medicines.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 dark: text-gray-500">
           {medicines.map((medicine) => (
             <div key={medicine._id} className="border rounded-lg p-4 bg-white shadow-lg flex flex-col items-center">
               <img src={medicine.ImageURL} alt={medicine.MedicineName} className="mb-3 w-32 h-32 object-cover" />
