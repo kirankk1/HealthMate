@@ -13,6 +13,7 @@ import { FaMoon } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
 import HealthMate from "../assets/images/HealthMate.png";
+import { signoutSuccess } from "../redux/user/userSlice";
 
 export default function Header() {
   const path = useLocation().pathname;
@@ -31,6 +32,23 @@ export default function Header() {
   const handleButtonClick = () => {
     setSearchVisible(true);
   };
+
+  const handleSignout = async () => {
+    try {
+      const res = await fetch("/api/user/signout", {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        dispatch(signoutSuccess(data));
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
 
   return (
     <Navbar className="border-b-2 top-0 py-4">
@@ -94,7 +112,7 @@ export default function Header() {
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
             <DropdownDivider />
-            <Dropdown.Item>Sign Out</Dropdown.Item>
+            <Dropdown.Item onClick={handleSignout} >Sign Out</Dropdown.Item>
           </Dropdown>
         ) : (
           <Link to="/sign-in">
