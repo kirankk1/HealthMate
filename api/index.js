@@ -4,9 +4,10 @@ import dotenv from "dotenv";
 import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
 import medicineRoutes from "./routes/medicineRoutes.js";
+import myMedicineRoutes from "./routes/myMedicineRoute.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import Medicine from "./models/medicine.js";
+
 
 dotenv.config();
 
@@ -14,7 +15,15 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(cors());
+// CORS configuration
+const corsOptions = {
+  origin: 'http://localhost:5173', // Your frontend URL
+  credentials: true, // Allow credentials
+};
+
+// Use CORS middleware
+app.use(cors(corsOptions));
+
 
 mongoose
   .connect(process.env.MONGO)
@@ -99,6 +108,7 @@ mongoose
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/medicines", medicineRoutes);
+app.use("/api/myMedicines", myMedicineRoutes); 
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
