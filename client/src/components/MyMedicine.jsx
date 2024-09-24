@@ -3,12 +3,12 @@ import axios from "axios";
 import { Button, Modal, Table } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
-
 const MyMedicine = () => {
   const [myMedicines, setMyMedicines] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [selectedMedicineId, setSelectedMedicineId] = useState(null);
 
   useEffect(() => {
     const fetchMyMedicines = async () => {
@@ -29,6 +29,18 @@ const MyMedicine = () => {
     fetchMyMedicines();
   }, []);
 
+  const handleDeleteMedicine = async (medicineId) => {
+    try {
+      await axios.delete(`http://localhost:3000/api/myMedicines/${medicineId}`, {
+        withCredentials: true,
+      });
+      setMyMedicines((prev) => prev.filter((med) => med._id !== medicineId));
+      setShowModal(false);
+    } catch (error) {
+      console.error("Failed to delete medicine:", error);
+    }
+  };
+
   if (loading) return <p className="text-center">Loading...</p>;
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
@@ -40,7 +52,11 @@ const MyMedicine = () => {
             <Table.Head>
               <Table.HeadCell>Medicine Name</Table.HeadCell>
               <Table.HeadCell>Medicine Image</Table.HeadCell>
-              <Table.HeadCell>Time Interval</Table.HeadCell>
+              <Table.HeadCell>From Date</Table.HeadCell>
+              <Table.HeadCell>To Date</Table.HeadCell>
+              <Table.HeadCell>Phone Number</Table.HeadCell>
+              <Table.HeadCell>Times Per Day</Table.HeadCell>
+              <Table.HeadCell>Time Schedule</Table.HeadCell>
               <Table.HeadCell>Delete</Table.HeadCell>
             </Table.Head>
             {myMedicines.map((myMed) => (
@@ -54,10 +70,19 @@ const MyMedicine = () => {
                       className="w-20 h-10 object-cover bg-gray-500"
                     />
                   </Table.Cell>
-                  <Table.Cell>{myMed.timeInterval}</Table.Cell>
+                  <Table.Cell>{new Date(myMed.fromDate).toLocaleDateString()}</Table.Cell>
+                  <Table.Cell>{new Date(myMed.toDate).toLocaleDateString()}</Table.Cell>
+                  <Table.Cell>{myMed.phoneNumber}</Table.Cell>
+                  <Table.Cell>{myMed.timesPerDay}</Table.Cell>
+                  <Table.Cell>
+                    {myMed.timeInputs.map((time, index) => (
+                      <p key={index}>Time {index + 1}: {time}</p>
+                    ))}
+                  </Table.Cell>
                   <Table.Cell>
                     <span
                       onClick={() => {
+                        setSelectedMedicineId(myMed._id);
                         setShowModal(true);
                       }}
                       className="font-medium text-red-500 hover:underline cursor-pointer"
@@ -73,6 +98,8 @@ const MyMedicine = () => {
       ) : (
         <p className="text-center">No medicines added yet.</p>
       )}
+
+      
       <Modal
         show={showModal}
         onClose={() => setShowModal(false)}
@@ -84,10 +111,10 @@ const MyMedicine = () => {
           <div className="text-center">
             <HiOutlineExclamationCircle className="h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto" />
             <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">
-              Are you sure you want to delete your post?
+              Are you sure you want to delete this medicine schedule?
             </h3>
             <div className="flex justify-center gap-4 ">
-              <Button color="failure">
+              <Button color="failure" onClick={() => handleDeleteMedicine(selectedMedicineId)}>
                 Yes, I'm sure
               </Button>
               <Button color="gray" onClick={() => setShowModal(false)}>
@@ -102,14 +129,3 @@ const MyMedicine = () => {
 };
 
 export default MyMedicine;
-
-// <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-//           {myMedicines.map((myMed) => (
-//             <div key={myMed._id} className="border rounded-lg p-4 bg-white shadow-lg flex flex-col items-center">
-//               <h2 className="text-xl font-semibold text-center mb-2">{myMed.medicineId.MedicineName}</h2>
-//               <p className="text-lg font-bold mb-1">Time Interval: {myMed.timeInterval} hours</p>
-//               <p className="text-sm text-gray-600">Description: {myMed.medicineId.Description}</p>
-//               {/* Add other relevant details here */}
-//             </div>
-//           ))}
-//         </div>

@@ -6,11 +6,22 @@ const router = express.Router();
 
 // Route to add a medicine
 router.post('/', authenticateUser, async (req, res) => {
-    const { medicineId, timeInterval } = req.body;
+    const { medicineId, fromDate, toDate, phoneNumber, timesPerDay, timeInputs } = req.body;
     const userId = req.user._id; // Assuming user ID is available after authentication
   
     try {
-        const newMyMedicine = new MyMedicine({ userId, medicineId, timeInterval });
+        // Create new MyMedicine instance with updated fields
+        const newMyMedicine = new MyMedicine({
+            userId,
+            medicineId,
+            fromDate,
+            toDate,
+            phoneNumber,
+            timesPerDay,
+            timeInputs
+        });
+        
+        // Save the new medicine entry
         await newMyMedicine.save();
         res.status(201).json(newMyMedicine);
     } catch (error) {

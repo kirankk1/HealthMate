@@ -31,16 +31,16 @@ export default function FooterCom() {
                 >
                   HealthMate 
                 </Footer.Link>
-                {/* <Footer.Link
+                <Footer.Link
                   href="https://kirankk1.github.io/TodoApp/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Todo App
-                </Footer.Link> */}
+                </Footer.Link>
               </Footer.LinkGroup>
             </div>
-            {/* <div>
+            <div>
               <Footer.Title title="Follow Us" />
               <Footer.LinkGroup col>
                 <Footer.Link
@@ -58,7 +58,7 @@ export default function FooterCom() {
                   GitHub
                 </Footer.Link>
               </Footer.LinkGroup>
-            </div> */}
+            </div>
             <div>
               <Footer.Title title="LEGAL" />
               <Footer.LinkGroup col>
@@ -81,7 +81,7 @@ export default function FooterCom() {
              <div className="flex gap-6 sm:mt-0 mt-4 sm:justify-center">
                 <Footer.Icon href="#" icon={BsFacebook} />
                 <Footer.Icon href="#" icon={BsInstagram} />
-                <Footer.Icon href="https://github.com/praniiyadav" icon={BsGithub} />
+                <Footer.Icon href="https://github.com/kirankk1" icon={BsGithub} />
                 <Footer.Icon href="" icon={BsTwitterX} />
              </div>
         </div>
