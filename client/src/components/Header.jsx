@@ -19,6 +19,7 @@ export default function Header() {
   const path = useLocation().pathname;
   const dispatch = useDispatch();
   const navigate = useNavigate(); 
+  const [isHovered, setIsHovered] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -48,6 +49,13 @@ export default function Header() {
       console.log(error.message);
     }
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set("searchTerm", searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
 
 
   return (
@@ -61,26 +69,38 @@ export default function Header() {
           <h2 className="hidden lg:block mt-1">HealthMate</h2>
         </div>
       </Link>
-      <form onSubmit={handleSearch}>
+      <form onSubmit={handleSubmit}>
         <TextInput
           placeholder="Search"
           type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
           rightIcon={AiOutlineSearch}
           className="hidden lg:inline"
-        />
-      </form>
-      <form onSubmit={handleSearch}>
-        <TextInput
-          placeholder="Search"
-          type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          rightIcon={AiOutlineSearch}
-          className="lg:hidden"
         />
       </form>
+      <div
+        className=""
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {!isHovered ? (
+          <Button className="w-10 h-9 lg:hidden" color="gray" pill>
+            <AiOutlineSearch />
+          </Button>
+        ) : (
+            <form onSubmit={handleSubmit}>
+              <TextInput
+                placeholder="Search"
+                type="text"
+                rightIcon={AiOutlineSearch}
+                className=""
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </form>
+        )}
+      </div>
       <div className="flex gap-2 md:order-2">
         <Button
           className="w-12 h-10 hidden sm:inline"

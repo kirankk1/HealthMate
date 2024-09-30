@@ -26,17 +26,9 @@ export default function FooterCom() {
               <Footer.LinkGroup col>
                 <Footer.Link
                   href="/about"
-                  target="_blank"
                   rel="noopener noreferrer"
                 >
                   HealthMate 
-                </Footer.Link>
-                <Footer.Link
-                  href="https://kirankk1.github.io/TodoApp/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Todo App
                 </Footer.Link>
               </Footer.LinkGroup>
             </div>

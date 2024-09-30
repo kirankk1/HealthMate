@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux"
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Label, Modal, Spinner, TextInput } from "flowbite-react";
 import "react-phone-number-input/style.css";
@@ -19,6 +20,9 @@ const Medicine = () => {
   
   const location = useLocation();
   const navigate = useNavigate();
+
+  const {currentUser} = useSelector((state) => state.user)
+
 
   useEffect(() => {
     const fetchMedicines = async () => {
@@ -44,8 +48,16 @@ const Medicine = () => {
   }, [location.search]);
 
   const handleAddMedicine = (medicineId) => {
-    setSelectedMedicineId(medicineId);
-    setShowModal(true);
+    try {
+      if(currentUser){
+        setSelectedMedicineId(medicineId);
+        setShowModal(true);
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+
+    
   };
 
   const handleViewDetails = (medicineId) => {
@@ -126,6 +138,7 @@ const Medicine = () => {
       ) : (
         <p className="text-center">No medicines found.</p>
       )}
+      
       <Modal
         show={showModal}
         onClose={() => setShowModal(false)}
