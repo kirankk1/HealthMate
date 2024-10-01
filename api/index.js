@@ -5,7 +5,6 @@ import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
 import medicineRoutes from "./routes/medicineRoutes.js";
 import myMedicineRoutes from "./routes/myMedicineRoute.js";
-import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
 
@@ -15,14 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-// CORS configuration
-const corsOptions = {
-  origin: "http://localhost:5173", // Your frontend URL
-  credentials: true, // Allow credentials
-};
 
-// Use CORS middleware
-app.use(cors(corsOptions));
 
 mongoose
   .connect(process.env.MONGO)
