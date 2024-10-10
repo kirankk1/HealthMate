@@ -27,8 +27,6 @@ const MedicineDetail = () => {
 
     fetchMedicine();
   }, [id]);
-  console.log("Medicine ID from params:", id);
-
 
   if (loading) return <p className="text-center text-gray-600">Loading...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;

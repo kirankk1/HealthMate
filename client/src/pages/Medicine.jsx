@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector } from "react-redux"
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Label, Modal, Spinner, TextInput } from "flowbite-react";
 import "react-phone-number-input/style.css";
@@ -17,18 +17,18 @@ const Medicine = () => {
   const [value, setValue] = useState();
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
-
+  
   const location = useLocation();
   const navigate = useNavigate();
-  const { currentUser } = useSelector((state) => state.user);
+
+  const {currentUser} = useSelector((state) => state.user)
+
 
   useEffect(() => {
     const fetchMedicines = async () => {
       setLoading(true);
       const queryParams = new URLSearchParams(location.search);
       const search = queryParams.get("search");
-
-      console.log("Search query:", search); // Debug: Ensure the search query is passed correctly
 
       try {
         const response = await axios.get(
@@ -37,7 +37,6 @@ const Medicine = () => {
           }`
         );
         setMedicines(response.data);
-        console.log("Fetched medicines:", response.data); // Debug: Ensure correct data is fetched
       } catch (error) {
         setError(error.message);
       } finally {
@@ -50,13 +49,15 @@ const Medicine = () => {
 
   const handleAddMedicine = (medicineId) => {
     try {
-      if (currentUser) {
+      if(currentUser){
         setSelectedMedicineId(medicineId);
         setShowModal(true);
       }
     } catch (error) {
       setError(error.message);
     }
+
+    
   };
 
   const handleViewDetails = (medicineId) => {
@@ -77,7 +78,7 @@ const Medicine = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     try {
       await axios.post(
         "http://localhost:3000/api/myMedicines",
@@ -87,7 +88,7 @@ const Medicine = () => {
           toDate,
           phoneNumber: value,
           timesPerDay,
-          timeInputs,
+          timeInputs
         },
         { withCredentials: true }
       );
@@ -135,9 +136,9 @@ const Medicine = () => {
           ))}
         </div>
       ) : (
-        <p className="text-center">No medicines found for your search.</p>
+        <p className="text-center">No medicines found.</p>
       )}
-
+      
       <Modal
         show={showModal}
         onClose={() => setShowModal(false)}
@@ -170,7 +171,7 @@ const Medicine = () => {
               />
             </div>
             <div>
-              <PhoneInput
+              <PhoneInput 
                 placeholder="Enter phone number"
                 value={value}
                 onChange={setValue}

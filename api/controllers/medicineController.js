@@ -3,15 +3,15 @@ import Medicine from '../models/medicine.js';
 
 export const getAllMedicines = async (req, res, next) => {
     try {
-        const { search } = req.query; 
-        console.log("Received search query:", search);  // Log the received search query
+        const { search } = req.query;  // Extract search term from query parameters
 
         let medicines;
         if (search) {
+            // If there's a search query, find medicines by symptoms or medicine name
             medicines = await Medicine.find({
                 $or: [
-                    { Symptoms: { $regex: search, $options: "i" } },  
-                    { MedicineName: { $regex: search, $options: "i" } }
+                    { Symptoms: { $regex: search, $options: "i" } },  // Case insensitive search in symptoms
+                    { MedicineName: { $regex: search, $options: "i" } } // Case insensitive search in medicine name
                 ]
             });
         } else {
@@ -25,7 +25,6 @@ export const getAllMedicines = async (req, res, next) => {
     }
 };
 
-
 export const getMedicineById = async (req, res, next) => {
     try {
         const medicine = await Medicine.findById(req.params.id);
@@ -33,8 +32,6 @@ export const getMedicineById = async (req, res, next) => {
             return res.status(404).json({ message: 'Medicine not found' });
         }
         res.json(medicine);
-        console.log("Medicine ID requested:", req.params.id);
-
     } catch (error) {
         console.error("Error fetching medicine: ", error.message);
         next(error);

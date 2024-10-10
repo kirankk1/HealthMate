@@ -9,7 +9,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import PrivateRoute from "./components/PrivateRoute";
 import Medicine from "./pages/Medicine";
-import MedicineDetail from "./pages/MedicineDetail";
+import MedicineDetail from "./pages/MedicineDetail"; 
 
 function App() {
   return (
@@ -23,8 +23,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
           <Route path="/medicines" element={<Medicine />} />
-          <Route path="/medicines/:id" element={<MedicineDetail />} />
-          <Route path="/search" element={<Medicine />} /> {/* New route for search */}
+          <Route path="/medicines/:id" element={<MedicineDetail />} /> 
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
         </Routes>
