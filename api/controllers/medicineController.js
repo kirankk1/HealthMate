@@ -32,6 +32,8 @@ export const getMedicineById = async (req, res, next) => {
             return res.status(404).json({ message: 'Medicine not found' });
         }
         res.json(medicine);
+        console.log("Medicine ID requested:", req.params.id);
+
     } catch (error) {
         console.error("Error fetching medicine: ", error.message);
         next(error);
