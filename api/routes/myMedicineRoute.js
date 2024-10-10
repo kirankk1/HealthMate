@@ -39,4 +39,18 @@ router.get('/', authenticateUser, async (req, res) => {
     }
 });
 
+router.delete('/:id', authenticateUser, async (req, res) => {
+    const { id } = req.params; // Get the medicine ID from request parameters
+  
+    try {
+        const deletedMedicine = await MyMedicine.findByIdAndDelete(id);
+        if (!deletedMedicine) {
+            return res.status(404).json({ message: 'Medicine schedule not found' });
+        }
+        res.status(204).send(); // No content, successful deletion
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 export default router;
