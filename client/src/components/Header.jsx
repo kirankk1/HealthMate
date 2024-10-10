@@ -25,13 +25,7 @@ export default function Header() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    navigate(`/medicines?search=${searchTerm}`); 
-  };
-
-  const [searchVisible, setSearchVisible] = useState(false);
-
-  const handleButtonClick = () => {
-    setSearchVisible(true);
+    navigate(`/medicines?search=${searchTerm}`); // Redirect to the Medicines page with the search query
   };
 
   const handleSignout = async () => {
@@ -49,14 +43,6 @@ export default function Header() {
       console.log(error.message);
     }
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const urlParams = new URLSearchParams(location.search);
-    urlParams.set("searchTerm", searchTerm);
-    const searchQuery = urlParams.toString();
-    navigate(`/search?${searchQuery}`);
-  };
-
 
   return (
     <Navbar className="border-b-2 top-0 py-4">
@@ -65,11 +51,11 @@ export default function Header() {
         className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
       >
         <div className="flex card">
-          <img src={HealthMate} alt="" srcset="" className="w-16 ml-3"/>
+          <img src={HealthMate} alt="" className="w-16 ml-3"/>
           <h2 className="hidden lg:block mt-1">HealthMate</h2>
         </div>
       </Link>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSearch}> {/* Use handleSearch here */}
         <TextInput
           placeholder="Search"
           type="text"
@@ -89,7 +75,7 @@ export default function Header() {
             <AiOutlineSearch />
           </Button>
         ) : (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSearch}> {/* Use handleSearch here */}
               <TextInput
                 placeholder="Search"
                 type="text"
@@ -161,7 +147,3 @@ export default function Header() {
     </Navbar>
   );
 }
-
-
-
-

@@ -3,15 +3,15 @@ import Medicine from '../models/medicine.js';
 
 export const getAllMedicines = async (req, res, next) => {
     try {
-        const { search } = req.query;  // Extract search term from query parameters
+        const { search } = req.query; 
+        console.log("Received search query:", search);  // Log the received search query
 
         let medicines;
         if (search) {
-            // If there's a search query, find medicines by symptoms or medicine name
             medicines = await Medicine.find({
                 $or: [
-                    { Symptoms: { $regex: search, $options: "i" } },  // Case insensitive search in symptoms
-                    { MedicineName: { $regex: search, $options: "i" } } // Case insensitive search in medicine name
+                    { Symptoms: { $regex: search, $options: "i" } },  
+                    { MedicineName: { $regex: search, $options: "i" } }
                 ]
             });
         } else {
@@ -24,6 +24,7 @@ export const getAllMedicines = async (req, res, next) => {
         next(error);
     }
 };
+
 
 export const getMedicineById = async (req, res, next) => {
     try {
