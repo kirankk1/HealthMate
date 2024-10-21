@@ -19,7 +19,10 @@ const __dirname = path.resolve()
 
 // CORS configuration
 const corsOptions = {
-  origin: 'http://localhost:5173', // Your frontend URL
+  origin: ['http://localhost:5173',
+    'https://healthmate-zrlf.onrender.com'],
+    
+   // Your frontend URL
   credentials: true, // Allow credentials
 };
 
