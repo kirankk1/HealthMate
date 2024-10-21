@@ -51,7 +51,7 @@ const MedicineDetail = () => {
         />
         <div className="flex">
           <p className="text-lg font-bold mt-2">Price: ₹{medicine.Price}</p>
-          <Link><Button gradientDuoTone="purpleToBlue" className="ml-2 w-20 ">Add</Button> </Link>
+         
         </div>
 
         <div className="mt-4 max-w-4xl">

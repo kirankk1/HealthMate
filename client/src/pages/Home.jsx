@@ -14,13 +14,13 @@ export default function Home() {
 
   return (
     <>
-      <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+      {/* <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
         <Carousel>
           <img src={img1} alt="..." />
           <img src={img2} alt="..." />
           <img src={img3} alt="..." />
         </Carousel>
-      </div>
+      </div> */}
       <div className="p-8 bg-[#f0f8ff] shadow-md text-center">
         <h1 className="text-4xl text-[#007bff] mb-2">
           Your Health, Our Priority
